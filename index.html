@@ -46,9 +46,13 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 16px 30p
 
 
 /* Daily date tabs and compact overview, inspired by the Korea itinerary template */
-.day-switcher{padding-bottom:16px}.day-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 12px}.day-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:100px;padding:8px 14px;background:#fff;color:#171923;border:1px solid #dfe2ec;border-radius:13px;line-height:1.35}.day-tab b{font-size:14px;font-weight:800}.day-tab small{font-size:12px;font-weight:700}.day-tab.active{background:#6658ef;color:white;border-color:#6658ef}.day-overview-wrap{overflow-x:auto}.day-overview{width:100%;min-width:0;border-collapse:collapse;font-size:13px}.day-overview th{background:#f0efff;color:#5147bf;padding:8px;text-align:left}.day-overview td{padding:8px;border-bottom:1px solid #e7e8f0}.day-overview tr.active{background:#f7f6ff;font-weight:650}.day-overview tr{cursor:pointer}.day-overview tr:hover{background:#f7f6ff}.itinerary-day{scroll-margin-top:16px}.itinerary-day.is-hidden{display:none!important}
+.day-switcher{padding-bottom:16px}.day-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 12px}.day-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-width:100px;padding:8px 14px;background:#fff;color:#171923;border:1px solid #dfe2ec;border-radius:13px;line-height:1.35}.day-tab b{font-size:14px;font-weight:800}.day-tab small{font-size:12px;font-weight:700}.day-tab.active{background:#6658ef;color:white;border-color:#6658ef}.day-overview-wrap{overflow-x:auto}.day-overview{width:100%;min-width:0;border-collapse:collapse;font-size:12px}.day-overview th{background:#f0efff;color:#5147bf;padding:8px;text-align:left}.day-overview td{padding:8px;border-bottom:1px solid #e7e8f0}.day-overview tr.active{background:#f7f6ff;font-weight:650}.day-overview tr{cursor:pointer} .day-overview tr:hover{background:#f7f6ff}
+.overview-date-cell{min-width:90px}
+.overview-day-label,.overview-date-label{display:block;line-height:1.45;white-space:nowrap}
+.overview-day-label{font-weight:750}
+.overview-date-label{font-size:.96em;color:inherit}.itinerary-day{scroll-margin-top:16px}.itinerary-day.is-hidden{display:none!important}
 .timeline-table tbody tr td:nth-child(3) input.cell,.timeline-table tbody tr td:nth-child(3) textarea.cell{font-weight:650;color:#172b3a}.timeline-table tbody tr td:nth-child(2) input.cell,.timeline-table tbody tr td:nth-child(2) textarea.cell{font-weight:500}
-@media(max-width:700px){.day-tab{min-width:calc(50% - 4px);flex:1}.day-overview{font-size:12px}.day-overview th,.day-overview td{padding:7px 6px}.day-overview th:first-child,.day-overview td:first-child{white-space:nowrap}}
+@media(max-width:700px){.day-tab{min-width:calc(50% - 4px);flex:1}.day-overview{font-size:11px}.day-overview th,.day-overview td{padding:6px 5px}.day-overview th:first-child,.day-overview td:first-child{white-space:nowrap}}
 
 
 /* Mobile-first refinements: prevent horizontal overflow and make controls thumb-friendly */
@@ -57,13 +61,30 @@ html{max-width:100%;overflow-x:hidden;scroll-behavior:smooth}body{width:100%;max
  header{padding:20px 14px 18px}header h1{font-size:25px;line-height:1.3}header p{font-size:14px}.wrap{padding-left:10px;padding-right:10px}main{padding-top:12px}.section{padding:12px;margin-bottom:12px;border-radius:12px}h2{font-size:20px}h3{font-size:16px}
  nav{gap:5px;scrollbar-width:thin}nav a{padding:8px;font-size:13px;flex-shrink:0}
  .dayhead{gap:8px}.day-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.day-tab{width:100%;min-width:0;min-height:56px;padding:8px 5px}.day-tab b{font-size:14px}.day-tab small{font-size:12px}
- .day-overview-wrap{overflow-x:auto;max-width:100%;border-radius:9px}.day-overview{min-width:560px;font-size:12px}.day-overview th,.day-overview td{padding:8px 7px;white-space:normal;overflow-wrap:anywhere}
+ .day-overview-wrap{overflow-x:auto;max-width:100%;border-radius:9px}.day-overview{min-width:0;width:100%;font-size:11px}.day-overview th,.day-overview td{padding:7px 6px;white-space:normal;overflow-wrap:anywhere}
  .timeline-wrap{width:100%;max-width:100%;overflow:visible}.timeline-table{width:100%;max-width:100%;border-spacing:0 9px}.timeline-table tbody:before{left:48px}.timeline-table tbody tr{grid-template-columns:49px minmax(0,1fr) 30px;column-gap:5px;width:100%;min-width:0}.timeline-table tbody tr td.timecell{padding-top:9px;min-width:0}.timeline-table tbody tr td.timecell:after{right:-6px;top:15px;width:7px;height:7px}.timeline-table .timebar{white-space:normal;word-break:normal;font-size:12px!important;line-height:1.3;padding:0 3px 0 0!important;text-align:right}.timeline-table tbody tr td:nth-child(2),.timeline-table tbody tr td:nth-child(3),.timeline-table tbody tr td:nth-child(4){min-width:0;padding:7px 8px;overflow-wrap:anywhere}.timeline-table tbody tr td:nth-child(2){padding-top:9px}.timeline-table tbody tr td:nth-child(4){padding-bottom:9px}.timeline-table td input.cell,.timeline-table td textarea.cell{box-sizing:border-box;width:100%;max-width:100%;min-width:0;font-size:14px;line-height:1.5;padding:5px 4px;overflow-wrap:anywhere}.timeline-table td textarea.cell{min-height:54px;resize:vertical}.timeline-table tbody tr td:has(input.cell):before,.timeline-table tbody tr td:has(textarea.cell):before{font-size:10px;margin-bottom:2px}.timeline-table .dragcell{grid-column:3;grid-row:1 / span 4;min-width:0}.timeline-table .drag-handle{width:28px;height:36px;font-size:18px;border-radius:9px}
  .grid,.checklist,.module-form{grid-template-columns:minmax(0,1fr)}.module-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.module-card{min-width:0;padding:10px;min-height:95px}.module-card b{font-size:14px}.module-card small{font-size:12px}.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.summary-card{padding:10px}.summary-card strong{font-size:18px}.module-item{grid-template-columns:auto minmax(0,1fr);padding:10px;gap:8px}.module-item .item-actions{grid-column:2}.module-item .item-actions button{min-height:36px}.photo-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
  .edit-modal{padding:8px;align-items:flex-end}.edit-panel{width:100%;max-height:90dvh;padding:16px;border-radius:16px 16px 10px 10px}.edit-panel input,.edit-panel textarea{font-size:16px;padding:11px}.edit-actions{position:sticky;bottom:-16px;background:white;padding:10px 0 2px;flex-wrap:wrap}.edit-actions button{flex:1;min-height:44px}
  button{min-height:40px}.field input,.field textarea,.module-form .field input,.module-form .field select{font-size:16px;min-width:0}
 }
 @media(max-width:380px){.wrap{padding-left:7px;padding-right:7px}.section{padding:9px}.timeline-table tbody:before{left:43px}.timeline-table tbody tr{grid-template-columns:44px minmax(0,1fr) 28px;column-gap:4px}.timeline-table .drag-handle{width:26px}.day-tab b{font-size:13px}.module-grid{gap:6px}}
+
+
+/* Parent-friendly mobile daily overview: show one active day, no horizontal table */
+.mobile-day-summary{display:none}
+@media(max-width:700px){
+ .day-overview-wrap{display:none!important}
+ .mobile-day-summary{display:block;margin-top:10px}
+ .mobile-summary-card{border:1px solid #e1e4f8;border-radius:14px;background:linear-gradient(145deg,#fbfaff,#f2f0ff);padding:13px 14px;box-shadow:0 2px 8px #312e8110}
+ .mobile-summary-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}
+ .mobile-summary-day{font-size:12px;font-weight:800;color:#6256d9;background:#e7e4ff;border-radius:999px;padding:4px 9px;white-space:nowrap}
+ .mobile-summary-steps{font-size:12px;font-weight:750;color:#245c83;background:#e7f2fa;border-radius:999px;padding:4px 8px;white-space:nowrap}
+ .mobile-summary-title{font-size:18px;line-height:1.35;font-weight:850;color:#1d2f42;margin:3px 0 9px;overflow-wrap:anywhere}
+ .mobile-summary-label{font-size:11px;color:#716c9b;font-weight:800;letter-spacing:.04em;margin-bottom:4px}
+ .mobile-summary-highlights{display:flex;flex-wrap:wrap;gap:6px}
+ .mobile-summary-chip{font-size:13px;line-height:1.35;color:#35445c;background:white;border:1px solid #e5e2fa;border-radius:8px;padding:6px 8px}
+ .mobile-summary-note{font-size:12px;color:#687487;margin-top:8px}
+}
 
 </style>
 </head>
@@ -130,31 +151,31 @@ html{max-width:100%;overflow-x:hidden;scroll-behavior:smooth}body{width:100%;max
   <button class="day-tab" type="button" onclick="switchDay('d3')"><b>DAY 3</b><small>12/8（二）</small></button>
   <button class="day-tab" type="button" onclick="switchDay('d4')"><b>DAY 4</b><small>12/9（三）</small></button>
  </div>
- <div class="day-overview-wrap"><table class="day-overview"><thead><tr><th>日期</th><th>當日主題</th><th>行程重點</th><th>步行估計</th></tr></thead><tbody>
- <tr data-overview="d1"><td>DAY 1｜12/6（日）</td><td>抵達東京・淺草・晴空塔</td><td>寄放行李 → 淺草散步 → 晴空塔夜景</td><td>8,000–11,000 步</td></tr>
- <tr data-overview="d2"><td>DAY 2｜12/7（一）</td><td>築地・銀杏・東京塔・澀谷・丸之內</td><td>築地早餐 → 銀杏大道 → 東京塔周邊 → 夜景</td><td>12,000–16,000 步</td></tr>
- <tr data-overview="d3"><td>DAY 3｜12/8（二）</td><td>teamLab・六本木聖誕點燈</td><td>teamLab → 飯店休息 → 六本木／青之洞窟擇一或兩處</td><td>10,000–14,000 步</td></tr>
- <tr data-overview="d4"><td>DAY 4｜12/9（三）</td><td>皇居外苑・二重橋・返程</td><td>皇居散步 → 回飯店取行李 → 前往成田機場</td><td>5,000–7,000 步＋機場步行</td></tr>
- </tbody></table></div>
+ <div class="day-overview-wrap"><table class="day-overview"><thead><tr><th>日期</th><th>當日主題</th><th>行程重點</th></tr></thead><tbody>
+ <tr data-overview="d1"><td class="overview-date-cell" data-summary-date="DAY 1｜12/6（日）"><span class="overview-day-label">DAY 1</span><span class="overview-date-label">12/6（日）</span></td><td>抵達東京・淺草・晴空塔</td><td>寄放行李 → 淺草散步 → 晴空塔夜景</td></tr>
+ <tr data-overview="d2"><td class="overview-date-cell" data-summary-date="DAY 2｜12/7（一）"><span class="overview-day-label">DAY 2</span><span class="overview-date-label">12/7（一）</span></td><td>築地・銀杏・東京塔・澀谷・丸之內</td><td>築地早餐 → 銀杏大道 → 東京塔周邊 → 夜景</td></tr>
+ <tr data-overview="d3"><td class="overview-date-cell" data-summary-date="DAY 3｜12/8（二）"><span class="overview-day-label">DAY 3</span><span class="overview-date-label">12/8（二）</span></td><td>teamLab・六本木聖誕點燈</td><td>teamLab → 飯店休息 → 六本木／青之洞窟擇一或兩處</td></tr>
+ <tr data-overview="d4"><td class="overview-date-cell" data-summary-date="DAY 4｜12/9（三）"><span class="overview-day-label">DAY 4</span><span class="overview-date-label">12/9（三）</span></td><td>皇居外苑・二重橋・返程</td><td>皇居散步 → 回飯店取行李 → 前往成田機場</td></tr>
+ </tbody></table></div><div class="mobile-day-summary" aria-live="polite"></div>
 </section>
 <section class="section itinerary-day" id="d1">
  <div class="dayhead"><div><h2>D1｜12/6（日）抵達東京・淺草・晴空塔</h2><p class="sub">主軸：先寄放行李、淺草慢慢逛，傍晚看晴空塔。疲累時可刪減合羽橋。</p></div><span class="daytag">步行估計 8,000–11,000 步</span></div><p class="mobile-tip">改為時間軸卡片模式；點開欄位可直接修改，按右側的 ⠿ 圖示可拖曳排序。</p>
- <div class="tablewrap timeline-wrap"><table class="timeline-table"><thead><tr><th>時間</th><th>交通／路線</th><th>行程與停留</th><th>吃飯／休息／預留時間</th><th aria-label="拖曳排序"></th></tr></thead><tbody id="rows-d1"></tbody></table></div>
+ <div class="tablewrap timeline-wrap"><table class="timeline-table"><thead><tr><th>時間</th><th>交通／路線</th><th>行程與停留</th><th>吃飯／休息／預留時間</th><th aria-label="拖曳排序"></th></tr></thead><tbody id="rows-d1"></tbody></table></div><div class="mobile-day-summary" aria-live="polite"></div>
  <div class="actions noprint"><button onclick="addRow('d1')">＋新增行程</button></div>
 </section>
 <section class="section itinerary-day" id="d2">
  <div class="dayhead"><div><h2>D2｜12/7（一）築地・銀杏大道・明治神宮・東京塔拍照・澀谷・丸之內</h2><p class="sub">主軸：早上築地吃早餐；東京鐵塔只在周邊拍照、不登塔；傍晚澀谷路口，晚上東京車站點燈。</p></div><span class="daytag">步行估計 12,000–16,000 步</span></div><p class="mobile-tip">改為時間軸卡片模式；點開欄位可直接修改，按右側的 ⠿ 圖示可拖曳排序。</p>
- <div class="tablewrap timeline-wrap"><table class="timeline-table"><thead><tr><th>時間</th><th>交通／路線</th><th>行程與停留</th><th>吃飯／休息／預留時間</th><th aria-label="拖曳排序"></th></tr></thead><tbody id="rows-d2"></tbody></table></div>
+ <div class="tablewrap timeline-wrap"><table class="timeline-table"><thead><tr><th>時間</th><th>交通／路線</th><th>行程與停留</th><th>吃飯／休息／預留時間</th><th aria-label="拖曳排序"></th></tr></thead><tbody id="rows-d2"></tbody></table></div><div class="mobile-day-summary" aria-live="polite"></div>
  <div class="actions noprint"><button onclick="addRow('d2')">＋新增行程</button></div>
 </section>
 <section class="section itinerary-day" id="d3">
  <div class="dayhead"><div><h2>D3｜12/8（二）teamLab・六本木聖誕點燈・澀谷青之洞窟</h2><p class="sub">主軸：teamLab 預約時段優先；下午回飯店休息，晚上看兩處燈飾。若累了，青之洞窟可改短停或取消。</p></div><span class="daytag">步行估計 10,000–14,000 步</span></div><p class="mobile-tip">改為時間軸卡片模式；點開欄位可直接修改，按右側的 ⠿ 圖示可拖曳排序。</p>
- <div class="tablewrap timeline-wrap"><table class="timeline-table"><thead><tr><th>時間</th><th>交通／路線</th><th>行程與停留</th><th>吃飯／休息／預留時間</th><th aria-label="拖曳排序"></th></tr></thead><tbody id="rows-d3"></tbody></table></div>
+ <div class="tablewrap timeline-wrap"><table class="timeline-table"><thead><tr><th>時間</th><th>交通／路線</th><th>行程與停留</th><th>吃飯／休息／預留時間</th><th aria-label="拖曳排序"></th></tr></thead><tbody id="rows-d3"></tbody></table></div><div class="mobile-day-summary" aria-live="polite"></div>
  <div class="actions noprint"><button onclick="addRow('d3')">＋新增行程</button></div>
 </section>
 <section class="section itinerary-day" id="d4">
  <div class="dayhead"><div><h2>D4｜12/9（三）皇居外苑・二重橋・返程</h2><p class="sub">主軸：早上安排約兩小時的東京經典景點；中午回飯店拿行李，預留機場時間。</p></div><span class="daytag">步行估計 5,000–7,000 步＋機場步行</span></div><p class="mobile-tip">改為時間軸卡片模式；點開欄位可直接修改，按右側的 ⠿ 圖示可拖曳排序。</p>
- <div class="tablewrap timeline-wrap"><table class="timeline-table"><thead><tr><th>時間</th><th>交通／路線</th><th>行程與停留</th><th>吃飯／休息／預留時間</th><th aria-label="拖曳排序"></th></tr></thead><tbody id="rows-d4"></tbody></table></div>
+ <div class="tablewrap timeline-wrap"><table class="timeline-table"><thead><tr><th>時間</th><th>交通／路線</th><th>行程與停留</th><th>吃飯／休息／預留時間</th><th aria-label="拖曳排序"></th></tr></thead><tbody id="rows-d4"></tbody></table></div><div class="mobile-day-summary" aria-live="polite"></div>
  <div class="actions noprint"><button onclick="addRow('d4')">＋新增行程</button></div>
 </section>
 
@@ -166,12 +187,12 @@ html{max-width:100%;overflow-x:hidden;scroll-behavior:smooth}body{width:100%;max
   <button class="day-tab" type="button" onclick="switchDay('d3')"><b>DAY 3</b><small>12/8（二）</small></button>
   <button class="day-tab" type="button" onclick="switchDay('d4')"><b>DAY 4</b><small>12/9（三）</small></button>
  </div>
- <div class="day-overview-wrap"><table class="day-overview"><thead><tr><th>日期</th><th>當日主題</th><th>行程重點</th><th>步行估計</th></tr></thead><tbody>
- <tr data-overview="d1"><td>DAY 1｜12/6（日）</td><td>抵達東京・淺草・晴空塔</td><td>寄放行李 → 淺草散步 → 晴空塔夜景</td><td>8,000–11,000 步</td></tr>
- <tr data-overview="d2"><td>DAY 2｜12/7（一）</td><td>築地・銀杏・東京塔・澀谷・丸之內</td><td>築地早餐 → 銀杏大道 → 東京塔周邊 → 夜景</td><td>12,000–16,000 步</td></tr>
- <tr data-overview="d3"><td>DAY 3｜12/8（二）</td><td>teamLab・六本木聖誕點燈</td><td>teamLab → 飯店休息 → 六本木／青之洞窟擇一或兩處</td><td>10,000–14,000 步</td></tr>
- <tr data-overview="d4"><td>DAY 4｜12/9（三）</td><td>皇居外苑・二重橋・返程</td><td>皇居散步 → 回飯店取行李 → 前往成田機場</td><td>5,000–7,000 步＋機場步行</td></tr>
- </tbody></table></div>
+ <div class="day-overview-wrap"><table class="day-overview"><thead><tr><th>日期</th><th>當日主題</th><th>行程重點</th></tr></thead><tbody>
+ <tr data-overview="d1"><td class="overview-date-cell" data-summary-date="DAY 1｜12/6（日）"><span class="overview-day-label">DAY 1</span><span class="overview-date-label">12/6（日）</span></td><td>抵達東京・淺草・晴空塔</td><td>寄放行李 → 淺草散步 → 晴空塔夜景</td></tr>
+ <tr data-overview="d2"><td class="overview-date-cell" data-summary-date="DAY 2｜12/7（一）"><span class="overview-day-label">DAY 2</span><span class="overview-date-label">12/7（一）</span></td><td>築地・銀杏・東京塔・澀谷・丸之內</td><td>築地早餐 → 銀杏大道 → 東京塔周邊 → 夜景</td></tr>
+ <tr data-overview="d3"><td class="overview-date-cell" data-summary-date="DAY 3｜12/8（二）"><span class="overview-day-label">DAY 3</span><span class="overview-date-label">12/8（二）</span></td><td>teamLab・六本木聖誕點燈</td><td>teamLab → 飯店休息 → 六本木／青之洞窟擇一或兩處</td></tr>
+ <tr data-overview="d4"><td class="overview-date-cell" data-summary-date="DAY 4｜12/9（三）"><span class="overview-day-label">DAY 4</span><span class="overview-date-label">12/9（三）</span></td><td>皇居外苑・二重橋・返程</td><td>皇居散步 → 回飯店取行李 → 前往成田機場</td></tr>
+ </tbody></table></div><div class="mobile-day-summary" aria-live="polite"></div>
 </section>
 <section class="section" id="maps">
  <h2>📍 景點地圖／導航</h2><p class="sub">點選景點即可開啟 Google 地圖。實際搭車路線與時間，請以當日地圖導航為準。</p>
@@ -230,6 +251,23 @@ html{max-width:100%;overflow-x:hidden;scroll-behavior:smooth}body{width:100%;max
 <style>
 .map-inline{display:inline-block;margin:4px 0 0 4px;font-size:12px;font-weight:700;color:#2674b8;text-decoration:none}.map-inline:hover{text-decoration:underline}
 .edit-modal{position:fixed;inset:0;background:#10283c88;z-index:9999;display:none;align-items:center;justify-content:center;padding:16px}.edit-modal.open{display:flex}.edit-panel{width:min(560px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:18px;padding:20px;box-shadow:0 18px 60px #10283c44}.edit-panel h3{margin:0 0 14px}.edit-panel label{display:block;font-size:13px;font-weight:700;margin:10px 0 5px;color:#42576a}.edit-panel input,.edit-panel textarea{box-sizing:border-box;width:100%;border:1px solid #dbe3eb;border-radius:9px;padding:10px;font:inherit}.edit-panel textarea{min-height:80px}.edit-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}.drag-handle{cursor:pointer;touch-action:none;user-select:none;-webkit-user-select:none}.drag-handle:active{cursor:grabbing}
+
+/* Parent-friendly mobile daily overview: show one active day, no horizontal table */
+.mobile-day-summary{display:none}
+@media(max-width:700px){
+ .day-overview-wrap{display:none!important}
+ .mobile-day-summary{display:block;margin-top:10px}
+ .mobile-summary-card{border:1px solid #e1e4f8;border-radius:14px;background:linear-gradient(145deg,#fbfaff,#f2f0ff);padding:13px 14px;box-shadow:0 2px 8px #312e8110}
+ .mobile-summary-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}
+ .mobile-summary-day{font-size:12px;font-weight:800;color:#6256d9;background:#e7e4ff;border-radius:999px;padding:4px 9px;white-space:nowrap}
+ .mobile-summary-steps{font-size:12px;font-weight:750;color:#245c83;background:#e7f2fa;border-radius:999px;padding:4px 8px;white-space:nowrap}
+ .mobile-summary-title{font-size:18px;line-height:1.35;font-weight:850;color:#1d2f42;margin:3px 0 9px;overflow-wrap:anywhere}
+ .mobile-summary-label{font-size:11px;color:#716c9b;font-weight:800;letter-spacing:.04em;margin-bottom:4px}
+ .mobile-summary-highlights{display:flex;flex-wrap:wrap;gap:6px}
+ .mobile-summary-chip{font-size:13px;line-height:1.35;color:#35445c;background:white;border:1px solid #e5e2fa;border-radius:8px;padding:6px 8px}
+ .mobile-summary-note{font-size:12px;color:#687487;margin-top:8px}
+}
+
 </style>
 <div class="edit-modal" id="schedule-edit-modal" role="dialog" aria-modal="true" aria-labelledby="schedule-edit-title"><div class="edit-panel"><h3 id="schedule-edit-title">編輯行程卡片</h3><label for="edit-time">時間</label><input id="edit-time" placeholder="例如 08:30–09:30"><label for="edit-title">標題／景點名稱</label><input id="edit-title" placeholder="例如 淺草寺散步"><label for="edit-content">交通／路線與行程內容</label><textarea id="edit-content" placeholder="交通方式、景點內容、停留時間"></textarea><label for="edit-meal">吃飯／休息／預留時間</label><textarea id="edit-meal" placeholder="用餐、休息或緩衝時間"></textarea><label for="edit-map">Google Maps 連結（可貼上網址；留白會自動搜尋標題）</label><input id="edit-map" type="url" placeholder="https://maps.google.com/..."><div class="edit-actions"><button type="button" class="secondary" id="edit-cancel">取消</button><button type="button" id="edit-save">儲存行程</button></div></div></div>
 
@@ -342,8 +380,9 @@ function addDragHandle(tr,d){
  cell.append(handle);tr.append(cell)
 }
 function wireRow(tr,d){const cells=[...tr.querySelectorAll('td')];cells.forEach((td,i)=>{if(i>0&&i<4)td.dataset.label=columnLabels[i-1]});addDragHandle(tr,d)}
-function switchDay(day){document.querySelectorAll('.itinerary-day').forEach(section=>section.classList.toggle('is-hidden',section.id!==day));document.querySelectorAll('.day-tab').forEach(btn=>btn.classList.toggle('active',btn.getAttribute('onclick')===`switchDay('${day}')`));document.querySelectorAll('[data-overview]').forEach(row=>row.classList.toggle('active',row.dataset.overview===day));try{localStorage.setItem('tokyoTripActiveDay',day)}catch(e){} }
-document.querySelectorAll('[data-overview]').forEach(row=>row.addEventListener('click',()=>switchDay(row.dataset.overview)));
+function renderMobileDaySummaries(day){document.querySelectorAll('.mobile-day-summary').forEach(box=>{const row=document.querySelector('[data-overview="'+day+'"]');if(!row){box.innerHTML='';return}const cells=[...row.cells].map(c=>c.textContent.trim());const date=row.cells[0]?.dataset.summaryDate||cells[0]||'';const theme=cells[1]||'';const highlights=(cells[2]||'').split(/\s*→\s*/).filter(Boolean);const steps=cells[3]||'';box.innerHTML='<div class="mobile-summary-card"><div class="mobile-summary-top"><span class="mobile-summary-day">'+date+'</span><span class="mobile-summary-steps">👣 '+steps+'</span></div><div class="mobile-summary-title">'+theme+'</div><div class="mobile-summary-label">今日重點</div><div class="mobile-summary-highlights">'+highlights.map((x,i)=>'<span class="mobile-summary-chip">'+(i+1)+'. '+x+'</span>').join('')+'</div><div class="mobile-summary-note">點選上方日期即可切換當日行程</div></div>'})}
+function switchDay(day){document.querySelectorAll('.itinerary-day').forEach(section=>section.classList.toggle('is-hidden',section.id!==day));document.querySelectorAll('.day-tab').forEach(btn=>btn.classList.toggle('active',btn.getAttribute('onclick')===`switchDay('${day}')`));document.querySelectorAll('[data-overview]').forEach(row=>row.classList.toggle('active',row.dataset.overview===day));renderMobileDaySummaries(day);try{localStorage.setItem('tokyoTripActiveDay',day)}catch(e){} }
+document.querySelectorAll('[data-overview]').forEach(row=>row.addEventListener('click',()=>switchDay(row.dataset.overview)));renderMobileDaySummaries(localStorage.getItem('tokyoTripActiveDay')||'d1');
 function renderDay(d){const tbody=document.getElementById('rows-'+d);tbody.innerHTML='';const rows=(saved.days&&saved.days[d])||initial[d].map(r=>({cells:normalizeScheduleCells(r)}));rows.forEach(r=>{const tr=el('tr');const cells=normalizeScheduleCells(r.cells||r);cells.forEach((v,i)=>{const cell=el('td',{class:i===0?'timecell':''});cell.append(makeCell(v,i>=2,i===0));tr.append(cell)});tr.dataset.mapUrl=r.mapUrl||'';wireRow(tr,d);tr.querySelectorAll('input.cell,textarea.cell').forEach(x=>x.addEventListener('input',()=>updateMapLink(tr)));updateMapLink(tr);tbody.append(tr)});}
 function updateProgress(d){save();updateModulesSummary()}
 function addRow(d){const tr=el('tr');['請填時間，例如 09:00–10:00','請填交通／路線','新增景點與停留時間','用餐、休息或預留緩衝'].forEach((v,i)=>{const cell=el('td',{class:i===0?'timecell':''});cell.append(makeCell(v,i>=2,i===0));tr.append(cell)});wireRow(tr,d);tr.querySelectorAll('input.cell,textarea.cell').forEach(x=>x.addEventListener('input',()=>updateMapLink(tr)));updateMapLink(tr);document.getElementById('rows-'+d).append(tr);save()}
