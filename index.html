@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#245c83">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="東京旅遊手帳">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>東京 4 天 3 夜｜旅遊行程手帳</title>
+<style>
+:root{--ink:#203040;--muted:#637381;--line:#dce5ec;--bg:#f4f7fa;--card:#fff;--blue:#245c83;--blue2:#e8f2fa;--gold:#d79a36;--green:#2e7758}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;line-height:1.55}
+header{background:linear-gradient(135deg,#173b59,#2e7193);color:white;padding:30px 18px 25px}
+.wrap{max-width:1180px;margin:auto;padding:0 16px}header h1{font-size:clamp(25px,4vw,38px);margin:0 0 8px}header p{margin:4px 0;color:#e8f3fa}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px}.pill{background:#ffffff1c;border:1px solid #ffffff48;padding:6px 10px;border-radius:999px;font-size:13px}
+nav{position:sticky;top:0;z-index:10;background:#ffffffed;backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:9px 12px;display:flex;gap:8px;overflow:auto}
+nav a{white-space:nowrap;color:var(--blue);text-decoration:none;font-size:14px;padding:6px 10px;border-radius:8px}nav a:hover{background:var(--blue2)}
+main{padding:20px 0 50px}.section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:0 0 18px;box-shadow:0 4px 16px #173b5908}
+h2{font-size:22px;margin:0 0 5px}h3{font-size:17px;margin:0 0 10px}.sub{color:var(--muted);font-size:15px;margin:0 0 16px}
+.dragcell{width:44px;min-width:44px;text-align:center;padding:8px 4px!important}.drag-handle{display:inline-flex;align-items:center;justify-content:center;width:36px;height:42px;padding:0;border-radius:10px;background:#edf3f7;color:#245c83;font-size:22px;cursor:grab;touch-action:none;user-select:none}.drag-handle:active{cursor:grabbing;background:#d8e9f4}.dragging{opacity:.4}.drop-target{outline:2px dashed #6b9fbd;outline-offset:-3px}.mobile-tip{font-size:13px;color:var(--muted);margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}.field input,.field textarea,.edit{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 9px;background:#fff;color:var(--ink);font:inherit}.field textarea{min-height:60px;resize:vertical}
+.flight{border:1px solid var(--line);border-radius:12px;padding:14px}.flight strong{display:block;color:var(--blue);margin-bottom:8px}
+.dayhead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}.daytag{color:var(--blue);background:var(--blue2);border-radius:8px;padding:5px 9px;font-size:13px;font-weight:700}
+.progress{height:8px;background:#e8edf1;border-radius:99px;overflow:hidden;margin:12px 0 3px}.progress div{height:100%;width:0;background:var(--green);transition:width .2s}.progresslabel{font-size:12px;color:var(--muted)}
+.tablewrap{overflow-x:auto;margin-top:14px}table{border-collapse:collapse;width:100%;min-width:900px;font-size:13px}th{background:#edf3f7;color:#314c60;text-align:left;font-weight:700}td,th{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}td input,td textarea{width:100%;border:1px solid transparent;border-radius:5px;background:transparent;padding:4px;color:var(--ink);font:inherit;min-width:75px}td textarea{min-width:110px;min-height:48px;resize:vertical}td input:focus,td textarea:focus{outline:1px solid #8bb5d1;background:#fff;border-color:#8bb5d1}.donecell{text-align:center;min-width:48px}.donecell input{width:19px;height:19px;accent-color:var(--green)}tr.completed{background:#f1f8f3}tr.completed td:not(.donecell) input,tr.completed td:not(.donecell) textarea{text-decoration:line-through;color:#77877e}
+button{border:0;border-radius:9px;padding:9px 12px;background:var(--blue);color:white;font:inherit;cursor:pointer}button.secondary{background:#e9eff4;color:#28485d}button.danger{background:#fff0ed;color:#9a4031}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.checklist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.checkitem{display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:#fff}.checkitem input{margin-top:5px;width:17px;height:17px;accent-color:var(--green);flex-shrink:0}.checkitem span{flex:1}.checkitem.checked span{text-decoration:line-through;color:#7c8b84}.checkitem input[type=text]{min-width:0;width:100%;border:0;border-bottom:1px dashed var(--line);padding:2px;background:transparent;color:var(--ink);font:inherit}
+.notice{border-left:4px solid var(--gold);background:#fff8eb;padding:12px 14px;border-radius:8px;font-size:14px;margin-top:12px}.note{font-size:13px;color:var(--muted)}.status{font-size:12px;color:var(--green);min-height:18px}.links a{color:var(--blue);word-break:break-all}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:10px 16px 30px}
+@media(max-width:700px){
+ .grid,.checklist{grid-template-columns:1fr}.section{padding:14px;border-radius:13px}.wrap{padding:0 9px}header{padding:22px 12px}header h1{font-size:27px}nav{padding:7px}nav a{font-size:13px}
+ .tablewrap{overflow:visible;margin:12px 0 0}table{min-width:0;width:100%;display:block;font-size:15px}thead{display:none}tbody{display:block}tbody tr{display:grid;grid-template-columns:minmax(0,1fr) 46px;gap:0;border:1px solid var(--line);border-radius:12px;background:#fff;margin:0 0 12px;overflow:hidden;box-shadow:0 2px 8px #173b5908}tbody td{display:block;border-bottom:1px solid #edf1f4;padding:8px 10px;min-width:0}tbody td.donecell{grid-column:1;grid-row:1;display:flex;align-items:center;gap:8px;background:#edf5fa;text-align:left;padding:8px 10px}tbody td.donecell:after{content:'完成這個行程';font-size:13px;color:#426075}tbody td.dragcell{grid-column:2;grid-row:1 / span 2;display:flex;align-items:center;justify-content:center;background:#edf5fa;border-bottom:1px solid #dce5ec}tbody td:nth-child(2){border-top:0}tbody td:has(input.cell),tbody td:has(textarea.cell){display:grid;grid-template-columns:94px minmax(0,1fr);gap:8px;align-items:start}tbody td:has(input.cell):before,tbody td:has(textarea.cell):before{content:attr(data-label);font-weight:700;font-size:13px;color:#496579;padding-top:5px}td input.cell,td textarea.cell{min-width:0;width:100%;font-size:15px;padding:5px 6px;border:1px solid #e4ebf0;background:#fff}td textarea.cell{min-height:54px}tbody tr.completed{background:#f1f8f3}tbody tr.completed td.donecell{background:#e6f2e9} .donecell input{width:22px;height:22px}.drag-handle{width:38px;height:48px;font-size:24px}
+}
+
+.module-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0}.module-card{display:flex;flex-direction:column;gap:5px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:13px;padding:15px;background:#fbfdff;min-height:112px}.module-card span{font-size:25px}.module-card b{font-size:16px}.module-card small{font-size:13px;color:var(--muted)}.module-card:active{background:var(--blue2)}.summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}.summary-card{padding:13px;border-radius:12px;background:#edf5fa;border:1px solid #dceaf3}.summary-card small{display:block;color:var(--muted);font-size:12px}.summary-card strong{display:block;font-size:21px;color:var(--blue);margin-top:4px}.module-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:end;margin:14px 0}.module-form .field input,.module-form .field select{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;background:white;font:inherit;color:var(--ink)}.module-form button{min-height:43px}.module-list{display:grid;gap:9px}.module-item{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:11px;padding:12px;background:#fff}.module-item .item-main{min-width:0}.module-item b{display:block;overflow-wrap:anywhere}.module-item small{display:block;color:var(--muted);overflow-wrap:anywhere;margin-top:3px}.module-item input[type=checkbox]{width:21px;height:21px;accent-color:var(--green)}.module-item .item-actions{display:flex;gap:6px;flex-wrap:wrap}.module-item button{padding:7px 9px;font-size:13px}.module-total{font-weight:700;color:var(--blue);text-align:right;margin-top:14px;font-size:18px}.photo-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}.photo-tile{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#f7fafc}.photo-tile img{width:100%;aspect-ratio:1;object-fit:cover;display:block}.photo-tile button{margin:8px}.module-item.done .item-main{text-decoration:line-through;color:#7a8b84}
+@media(max-width:700px){.module-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.module-card{padding:12px;min-height:104px}.summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.summary-card strong{font-size:19px}.module-form{grid-template-columns:1fr;gap:10px}.module-form button{width:100%}.module-item{grid-template-columns:auto minmax(0,1fr);gap:8px}.module-item .item-actions{grid-column:2}.photo-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+@media print{body{background:white}.noprint,nav,button{display:none!important}.section{box-shadow:none;break-inside:avoid;border-color:#bbb}.tablewrap{overflow:visible}table{min-width:0;font-size:10px}td input,td textarea{border:0;padding:0;font-size:10px}header{background:#fff;color:#111;padding:10px}header p,.pill{color:#333}.pills{display:none}.wrap{max-width:none}.section{margin-bottom:8px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <h1>東京 4 天 3 夜｜旅遊行程手帳</h1>
+  <p>2026/12/6（日）– 12/9（三）・爸媽也能輕鬆看懂的版本</p>
+  <div class="pills"><span class="pill">🏨 日本橋賽博飯店</span><span class="pill">🚇 以電車移動</span><span class="pill">☑️ 行程可打勾</span><span class="pill">✏️ 內容可直接編輯</span></div><div class="actions noprint"><button id="install-app" style="display:none;background:#fff;color:#245c83">＋ 加到手機主畫面</button></div>
+ </div>
+</header>
+<nav class="noprint">
+ <a href="#overview">旅行總覽</a><a href="#flights">航班住宿</a><a href="#d1">D1 行程</a><a href="#d2">D2 行程</a><a href="#d3">D3 行程</a><a href="#d4">D4 行程</a><a href="#restaurants">餐廳清單</a><a href="#budget">預算分帳</a><a href="#shopping">購物清單</a><a href="#photos">旅程照片</a><a href="#tickets">票券收納</a><a href="#packing">行李清單</a>
+</nav>
+<main class="wrap">
+<section class="section" id="overview">
+ <h2>🗼 東京旅行總覽</h2><p class="sub">把旅程常用資訊集中在這裡。爸媽只要點上方的分類，就能快速找到需要的內容。</p>
+ <div class="module-grid">
+  <a class="module-card" href="#d1"><span>🗓️</span><b>每日行程</b><small>四天安排、完成打勾</small></a>
+  <a class="module-card" href="#restaurants"><span>🍜</span><b>餐廳清單</b><small>想吃的店、地圖導航</small></a>
+  <a class="module-card" href="#budget"><span>💴</span><b>預算／分帳</b><small>記錄花費、換算台幣</small></a>
+  <a class="module-card" href="#shopping"><span>🛍️</span><b>購物清單</b><small>想買的商品與備註</small></a>
+  <a class="module-card" href="#photos"><span>📸</span><b>旅程照片</b><small>在這台裝置選照片預覽</small></a>
+  <a class="module-card" href="#tickets"><span>🎟️</span><b>票券收納</b><small>票券名稱、網址與備註</small></a>
+ </div>
+ <div class="summary-grid"><div class="summary-card"><small>行程完成</small><strong id="sum-progress">0%</strong></div><div class="summary-card"><small>記帳總額（台幣）</small><strong id="sum-budget">NT$0</strong></div><div class="summary-card"><small>待辦行李</small><strong id="sum-packing">0 項</strong></div><div class="summary-card"><small>餐廳／票券</small><strong id="sum-items">0 項</strong></div></div>
+ <p class="note">目前為本機模式：資料會保存在這個瀏覽器／裝置，不會自動同步到家人手機。跨裝置使用前，請先匯出備份。</p>
+</section>
+<section class="section" id="flights">
+ <h2>✈️ 機票與住宿資訊</h2><p class="sub">點欄位就能修改；行程完成後勾選左上方方框。內容會自動儲存在這台裝置的瀏覽器。</p>
+ <div class="grid">
+  <div class="flight"><strong>去程｜2026/12/6（日）</strong><div class="grid">
+   <div class="field"><label>航空公司</label><input data-save="out_airline" value="樂桃航空 Peach Aviation"></div>
+   <div class="field"><label>航班</label><input data-save="out_flight" value="請填入航班編號"></div>
+   <div class="field"><label>出發</label><input data-save="out_from" value="台北桃園 TPE"></div>
+   <div class="field"><label>抵達</label><input data-save="out_to" value="東京成田 NRT"></div>
+   <div class="field"><label>起飛時間</label><input data-save="out_time" value="02:25"></div>
+   <div class="field"><label>抵達時間</label><input data-save="out_arrive" value="06:30"></div>
+  </div></div>
+  <div class="flight"><strong>回程｜2026/12/9（三）</strong><div class="grid">
+   <div class="field"><label>航空公司</label><input data-save="back_airline" value="樂桃航空 Peach Aviation（請確認）"></div>
+   <div class="field"><label>航班</label><input data-save="back_flight" value="請填入航班編號"></div>
+   <div class="field"><label>出發</label><input data-save="back_from" value="東京成田 NRT"></div>
+   <div class="field"><label>抵達</label><input data-save="back_to" value="台北桃園 TPE"></div>
+   <div class="field"><label>起飛時間</label><input data-save="back_time" value="16:35"></div>
+   <div class="field"><label>抵達時間</label><input data-save="back_arrive" value="20:00"></div>
+  </div></div>
+ </div>
+ <div class="grid" style="margin-top:14px">
+  <div class="field"><label>住宿名稱</label><input data-save="hotel" value="日本橋賽博飯店 Hotel Nihonbashi Saibo"></div>
+  <div class="field"><label>住宿地址</label><input data-save="hotel_address" value="東京都中央區日本橋人形町 3-3-16"></div>
+  <div class="field"><label>住宿電話／訂房編號</label><input data-save="hotel_booking" value="請自行填入"></div>
+  <div class="field"><label>緊急聯絡人／旅平險資料</label><input data-save="emergency" value="請自行填入"></div>
+ </div>
+ <div class="notice">航班編號、行李額度、報到櫃檯與住宿寄放行李規定，請以訂票／飯店確認信為準。去程為凌晨起飛，請特別確認前往桃園機場的交通安排。</div>
+</section>
+
+<section class="section" id="d1">
+ <div class="dayhead"><div><h2>D1｜12/6（日）抵達東京・淺草・晴空塔</h2><p class="sub">主軸：先寄放行李、淺草慢慢逛，傍晚看晴空塔。疲累時可刪減合羽橋。</p></div><span class="daytag">步行估計 8,000–11,000 步</span></div>
+ <div class="progress"><div id="bar-d1"></div></div><div class="progresslabel" id="label-d1">完成 0 / 0 項</div><p class="mobile-tip">手機操作：點開文字可修改；按最右邊的 ⠿ 圖示拖曳調整順序。</p>
+ <div class="tablewrap"><table><thead><tr><th>完成</th><th>時間</th><th>交通／路線</th><th>行程與停留</th><th>吃飯／休息</th><th>備註與彈性方案</th><th aria-label="拖曳排序"></th></tr></thead><tbody id="rows-d1"></tbody></table></div>
+ <div class="actions noprint"><button onclick="addRow('d1')">＋新增行程</button><button class="secondary" onclick="uncheckDay('d1')">取消本日勾選</button></div>
+</section>
+<section class="section" id="d2">
+ <div class="dayhead"><div><h2>D2｜12/7（一）築地・銀杏大道・明治神宮・東京塔拍照・澀谷・丸之內</h2><p class="sub">主軸：早上築地吃早餐；東京鐵塔只在周邊拍照、不登塔；傍晚澀谷路口，晚上東京車站點燈。</p></div><span class="daytag">步行估計 12,000–16,000 步</span></div>
+ <div class="progress"><div id="bar-d2"></div></div><div class="progresslabel" id="label-d2">完成 0 / 0 項</div><p class="mobile-tip">手機操作：點開文字可修改；按最右邊的 ⠿ 圖示拖曳調整順序。</p>
+ <div class="tablewrap"><table><thead><tr><th>完成</th><th>時間</th><th>交通／路線</th><th>行程與停留</th><th>吃飯／休息</th><th>備註與彈性方案</th><th aria-label="拖曳排序"></th></tr></thead><tbody id="rows-d2"></tbody></table></div>
+ <div class="actions noprint"><button onclick="addRow('d2')">＋新增行程</button><button class="secondary" onclick="uncheckDay('d2')">取消本日勾選</button></div>
+</section>
+<section class="section" id="d3">
+ <div class="dayhead"><div><h2>D3｜12/8（二）teamLab・六本木聖誕點燈・澀谷青之洞窟</h2><p class="sub">主軸：teamLab 預約時段優先；下午回飯店休息，晚上看兩處燈飾。若累了，青之洞窟可改短停或取消。</p></div><span class="daytag">步行估計 10,000–14,000 步</span></div>
+ <div class="progress"><div id="bar-d3"></div></div><div class="progresslabel" id="label-d3">完成 0 / 0 項</div><p class="mobile-tip">手機操作：點開文字可修改；按最右邊的 ⠿ 圖示拖曳調整順序。</p>
+ <div class="tablewrap"><table><thead><tr><th>完成</th><th>時間</th><th>交通／路線</th><th>行程與停留</th><th>吃飯／休息</th><th>備註與彈性方案</th><th aria-label="拖曳排序"></th></tr></thead><tbody id="rows-d3"></tbody></table></div>
+ <div class="actions noprint"><button onclick="addRow('d3')">＋新增行程</button><button class="secondary" onclick="uncheckDay('d3')">取消本日勾選</button></div>
+</section>
+<section class="section" id="d4">
+ <div class="dayhead"><div><h2>D4｜12/9（三）皇居外苑・二重橋・返程</h2><p class="sub">主軸：早上安排約兩小時的東京經典景點；中午回飯店拿行李，預留機場時間。</p></div><span class="daytag">步行估計 5,000–7,000 步＋機場步行</span></div>
+ <div class="progress"><div id="bar-d4"></div></div><div class="progresslabel" id="label-d4">完成 0 / 0 項</div><p class="mobile-tip">手機操作：點開文字可修改；按最右邊的 ⠿ 圖示拖曳調整順序。</p>
+ <div class="tablewrap"><table><thead><tr><th>完成</th><th>時間</th><th>交通／路線</th><th>行程與停留</th><th>吃飯／休息</th><th>備註與彈性方案</th><th aria-label="拖曳排序"></th></tr></thead><tbody id="rows-d4"></tbody></table></div>
+ <div class="actions noprint"><button onclick="addRow('d4')">＋新增行程</button><button class="secondary" onclick="uncheckDay('d4')">取消本日勾選</button></div>
+</section>
+
+<section class="section" id="restaurants">
+ <h2>🍜 餐廳清單</h2><p class="sub">先把想吃的餐廳記下來；按「地圖」可直接開啟 Google 地圖搜尋。</p>
+ <div class="module-form"><div class="field"><label>餐廳／料理名稱</label><input id="rest-name" placeholder="例如：築地市場海鮮丼"></div><div class="field"><label>區域／地址</label><input id="rest-area" placeholder="例如：築地市場"></div><div class="field"><label>備註</label><input id="rest-note" placeholder="營業時間、想點的餐點、預算"></div><button onclick="addModuleItem('restaurants')">＋新增餐廳</button></div><div id="restaurants-list" class="module-list"></div>
+</section>
+<section class="section" id="budget">
+ <h2>💴 旅行預算／分帳</h2><p class="sub">記下旅途中每一筆花費，金額可以填日圓或新台幣，方便回家後核對。</p>
+ <div class="module-form"><div class="field"><label>花費項目</label><input id="expense-name" placeholder="例如：午餐、地鐵、伴手禮"></div><div class="field"><label>金額</label><input id="expense-amount" type="number" min="0" placeholder="0"></div><div class="field"><label>貨幣</label><select id="expense-currency"><option value="JPY">日圓 JPY</option><option value="TWD">新台幣 TWD</option></select></div><div class="field"><label>付款人</label><input id="expense-payer" placeholder="例如：我／爸爸／媽媽"></div><div class="field"><label>日圓換台幣匯率</label><input id="fx-rate" type="number" min="0" step="0.0001" value="0.22"></div><button onclick="addModuleItem('expenses')">＋新增記帳</button></div><div id="expenses-list" class="module-list"></div><div class="module-total" id="expense-total">總支出：NT$0</div>
+</section>
+<section class="section" id="shopping">
+ <h2>🛍️ 購物清單</h2><p class="sub">把想買的東西集中列出來，買到後就打勾。</p>
+ <div class="module-form"><div class="field"><label>商品名稱</label><input id="shop-name" placeholder="例如：藥妝、東京香蕉"></div><div class="field"><label>預計價格（選填）</label><input id="shop-price" placeholder="例如：1500 日圓"></div><div class="field"><label>在哪裡買／備註</label><input id="shop-note" placeholder="例如：機場免稅店"></div><button onclick="addModuleItem('shopping')">＋新增購物</button></div><div id="shopping-list" class="module-list"></div>
+</section>
+<section class="section" id="photos">
+ <h2>📸 旅程照片</h2><p class="sub">選擇手機或電腦裡的照片，就能在這個頁面預覽。照片不會自動上傳到網路；重新整理後的保存情況依瀏覽器而異。</p><div class="field"><label>選擇照片</label><input id="photo-upload" type="file" accept="image/*" multiple></div><div id="photo-gallery" class="photo-gallery"></div>
+</section>
+<section class="section" id="tickets">
+ <h2>🎟️ 票券／預約資訊</h2><p class="sub">集中放 teamLab、機票、住宿或其他門票的連結與預約編號；出發前可快速查找。</p>
+ <div class="module-form"><div class="field"><label>票券／預約名稱</label><input id="ticket-name" placeholder="例如：teamLab Planets"></div><div class="field"><label>網址或預約編號</label><input id="ticket-link" placeholder="貼上官方網址或填寫編號"></div><div class="field"><label>備註</label><input id="ticket-note" placeholder="例如：12/8 10:30 入場，記得提早到"></div><button onclick="addModuleItem('tickets')">＋新增票券</button></div><div id="tickets-list" class="module-list"></div>
+</section>
+<section class="section" id="packing">
+ <h2>🧳 行李清單｜出門前逐項打勾</h2><p class="sub">可自行修改項目或新增；依個人需求調整。冬天東京早晚偏冷，洋蔥式穿搭較方便。</p>
+ <div class="checklist" id="packing-list"></div>
+ <div class="actions noprint"><button onclick="addPacking()">＋新增行李項目</button><button class="secondary" onclick="uncheckPacking()">全部取消勾選</button></div>
+ <div class="notice">樂桃航空的手提／託運行李尺寸、重量與件數限制，請依你購買的票種和訂位紀錄確認；行動電源通常須隨身攜帶，勿放入託運行李，並遵守航空公司規定。</div>
+</section>
+
+<section class="section" id="tips">
+ <h2>📝 旅行備忘與彈性方案</h2>
+ <div class="grid">
+  <div><h3>出發前確認</h3><div class="checklist" id="prep-list"></div></div>
+  <div><h3>自由編輯備忘</h3><div class="field"><label>餐廳、預約編號、集合點、預算或其他提醒</label><textarea data-save="memo" style="min-height:180px" placeholder="例如：teamLab 預約時間、青之洞窟活動公告、爸媽想吃的餐廳……"></textarea></div></div>
+ </div>
+ <div class="notice"><strong>彈性原則：</strong>D2 行程最滿，爸媽若累了，優先縮短銀杏大道或東京塔周邊停留，保留澀谷或東京車站其中一個夜景即可。D3 若 teamLab 後疲累，先回飯店休息，六本木與青之洞窟擇一。D4 請勿為了加景點而壓縮前往成田機場的時間。</div>
+ <p class="note links">官方資訊：<a href="https://teamlabplanets.dmm.com/en" target="_blank" rel="noopener">teamLab Planets 售票／開放資訊</a> ・ <a href="https://shibuya-aonodokutsu.jp/" target="_blank" rel="noopener">澀谷青之洞窟活動官網</a> ・ <a href="https://www.hotel-saibo.co.jp/access/" target="_blank" rel="noopener">日本橋賽博飯店交通資訊</a></p>
+ <div class="actions noprint"><button onclick="window.print()">列印／另存 PDF</button><button class="secondary" onclick="exportData()">匯出備份 JSON</button><button class="danger" onclick="resetAll()">重設全部內容</button></div>
+ <div class="status" id="save-status" aria-live="polite">修改會自動儲存到目前瀏覽器。</div>
+</section>
+</main>
+<footer>東京行程手帳・可自行編輯。此網頁的自動儲存只作用於目前瀏覽器／裝置；建議偶爾匯出 JSON 備份。</footer>
+<script>
+const initial = {
+ d1:[
+ ["06:30–08:00","成田機場入境、領行李","機場內步行；預留入境排隊時間","抵達後先上洗手間、補水；停留約 90 分鐘","便利商店買水、簡單早餐","入境時間依現場而定；若班機延誤，後續行程整體順延。"],
+ ["08:00–09:30","成田 → 人形町飯店","搭乘適合的機場交通至市區，再轉往人形町；出發前確認班次與票價","前往飯店寄放行李，約 60–90 分鐘","途中可買飯糰／咖啡","通常入住時間約 15:00，先確認能否寄放行李。凌晨航班後別排太滿。"],
+ ["09:30–10:30","飯店附近休息／前往淺草","人形町出發，依當日路線搭地鐵至淺草","交通與短暫休息約 1 小時","可在淺草找咖啡店坐一下","若爸媽睡眠不足，可把淺草開始時間延後。"],
+ ["10:30–12:30","淺草寺、雷門、仲見世","淺草站步行；景點間慢慢走","停留約 2 小時","仲見世小吃、抹茶甜點；午餐可選蕎麥麵、天丼或定食","人潮多，注意腳下與隨身物品；不必每間店都逛。"],
+ ["12:30–13:30","淺草午餐","以淺草寺周邊步行可到的餐廳為主","用餐約 60 分鐘","天丼、蕎麥麵、烏龍麵或熟食定食","避開排隊過長的店，爸媽有座位優先。"],
+ ["13:30–14:30","合羽橋道具街（彈性）","從淺草步行或短程搭車","最多停留 45–60 分鐘","沿路咖啡／休息","若累、下雨或不愛逛廚具，直接取消，提早去飯店附近休息。"],
+ ["14:30–16:00","回飯店辦理入住、休息","搭地鐵回人形町；步行回飯店","休息約 90 分鐘","便利商店補給、喝熱飲","建議讓爸媽坐下或小睡，不要連續走一整天。"],
+ ["16:00–18:30","東京晴空塔／東京 Solamachi","從人形町搭地鐵至押上／晴空塔周邊","商場與周邊約 2–2.5 小時；展望台依購票情況","Solamachi 用晚餐或甜點","若要上展望台，先確認日落時段票券；不想排隊就逛商場、在外圍拍照。"],
+ ["18:30–19:30","返回飯店","押上搭地鐵回人形町","約 30–45 分鐘含步行","沿路買隔天早餐","若疲累，晴空塔行程縮短，早點回飯店。"]
+ ],
+ d2:[
+ ["06:45–07:15","飯店 → 築地場外市場","從人形町搭東京 Metro 日比谷線至築地附近，再步行","約 30 分鐘","—","先查想吃店家的週一營業時間；市場並非每間店都一早開。"],
+ ["07:15–08:30","築地場外市場早餐","市場內步行","停留約 75 分鐘","玉子燒、海鮮丼／壽司；不吃生食可選烤魚、熟食或飯糰","熱門店可能排隊，建議看到合適座位就用餐。"],
+ ["08:30–09:15","築地 → 明治神宮外苑銀杏大道","搭地鐵轉乘至青山一丁目／外苑前，再步行","交通約 45 分鐘","途中可買熱飲","依即時路線調整；不需為了每個拍照點走完整條大道。"],
+ ["09:15–10:00","明治神宮外苑銀杏大道","步行拍照、慢慢欣賞銀杏","停留約 45 分鐘","附近咖啡店視營業情況休息","12 月初銀杏顏色依天氣而異；人多時注意行人動線。"],
+ ["10:00–10:45","前往明治神宮","搭地鐵／步行轉乘至原宿或明治神宮前","交通約 45 分鐘","—","若爸媽腳累，可直接搭車到較近入口，減少步行。"],
+ ["10:45–11:45","明治神宮","依入口慢慢走至主要參拜區再折返","停留約 60 分鐘","途中休息、補水","園區路面較長，走到覺得足夠即可，不必追求走完全程。"],
+ ["11:45–12:30","前往午餐地點","搭地鐵至方便用餐的區域","交通約 45 分鐘","—","不安排原宿購物；優先找座位與洗手間。"],
+ ["12:30–13:30","午餐與休息","選擇地鐵站附近餐廳","用餐約 60 分鐘","定食、烏龍麵、咖哩或家庭餐廳","吃完坐一下，為下午夜景留體力。"],
+ ["13:30–14:15","前往東京鐵塔周邊","搭地鐵至赤羽橋／神谷町／御成門一帶，依拍照點選站","交通約 45 分鐘","—","此行只在塔周邊拍照，不登塔。"],
+ ["14:15–15:30","東京鐵塔周邊拍照","塔下拍照；芝公園或增上寺擇一","停留約 60–75 分鐘","找咖啡店短休","想少走路：只選芝公園拍塔；若想拍寺院與鐵塔同框，改選增上寺。不要兩邊都硬走。"],
+ ["15:30–16:15","前往澀谷","搭地鐵前往澀谷站","交通約 45 分鐘","—","尖峰時段車站人多，跟爸媽約好集合點。"],
+ ["16:15–17:45","澀谷站周邊休息／自由活動","站內商場或附近咖啡店","停留約 90 分鐘","咖啡、甜點或提早吃晚餐","先坐著休息，等天色變暗；若累了可縮短購物。"],
+ ["17:45–19:00","澀谷十字路口、忠犬八公","澀谷站八公口周邊步行","拍照約 60–75 分鐘","簡單晚餐／小吃","人潮多，拍照時留意同行家人；不必登高看路口。"],
+ ["19:00–19:45","澀谷 → 東京站／丸之內","搭地鐵至東京站或大手町，再步行至丸之內側","交通約 45 分鐘","—","若爸媽累了，這段夜景可取消，直接回飯店。"],
+ ["19:45–20:30","東京站紅磚站舍、丸之內燈飾","丸之內側外圍散步","停留約 45 分鐘","可買熱飲","2026 年燈飾細節以官方公告為準；天冷請戴手套。"],
+ ["20:30–21:00","返回飯店","東京站／大手町搭車至人形町","約 30 分鐘","—","回飯店後早點休息。"]
+ ],
+ d3:[
+ ["09:00–10:00","飯店 → teamLab Planets","人形町出發，搭地鐵／百合海鷗號前往新豐洲；依即時路線調整","約 45–60 分鐘","早餐先在飯店附近吃","門票需預約指定入場時段；建議依票面時間反推出發時間。"],
+ ["10:00–12:30","teamLab Planets 豐洲","新豐洲站步行約 1 分鐘；以票券入口為準","參觀約 2–2.5 小時","館內餐飲依當日開放與入場規定","部分展區需涉水，建議穿方便捲起的褲子；確認現場規定與置物安排。"],
+ ["12:30–13:30","豐洲午餐","豐洲／市場前一帶餐廳","用餐約 60 分鐘","熟食定食、拉麵或商場餐廳","爸媽優先找有座位、洗手間方便的餐廳。"],
+ ["13:30–14:30","返回飯店","搭車回人形町","約 45–60 分鐘","—","留足交通緩衝。"],
+ ["14:30–16:30","飯店休息","回房間休息、充電、整理照片","約 2 小時","便利商店補水／小點心","這段休息建議保留，不要再加購物行程。"],
+ ["16:30–17:15","飯店 → 六本木","搭地鐵前往六本木站／六本木之丘","約 35–45 分鐘","—","出發前查看當日天氣與點燈公告。"],
+ ["17:15–18:15","六本木聖誕點燈","六本木之丘、櫸坂一帶","停留約 60 分鐘","可先喝熱飲或找室內休息處","點燈活動日期、動線與人潮管制請以 2026 官方公告為準。"],
+ ["18:15–19:00","晚餐／休息","六本木周邊商場或餐廳","約 45 分鐘","簡單晚餐，選擇有座位的店","不要只吃甜點，避免晚間走路時體力不足。"],
+ ["19:00–19:40","六本木 → 澀谷","搭地鐵前往澀谷","約 30–40 分鐘","—","人潮多時預留更多轉乘時間。"],
+ ["19:40–20:30","澀谷青之洞窟（待確認）","依活動官方公告的入口與步行動線","停留約 45–60 分鐘","可買熱飲；避免邊走邊吃","2026 活動日期尚需官方確認。若未舉辦、排隊太長或爸媽累了，就在澀谷站周邊休息後回飯店。"],
+ ["20:30–21:15","返回飯店","澀谷搭車回人形町","約 35–45 分鐘","—","今晚不再加新宿，保留體力。"]
+ ],
+ d4:[
+ ["07:30–08:15","早餐、整理行李、退房","飯店內／附近早餐店；行李寄放飯店","約 45 分鐘","簡單早餐","先確認飯店可寄放行李至何時；重要物品隨身帶。"],
+ ["08:15–09:00","人形町 → 皇居外苑","搭地鐵至大手町／二重橋前等站，再步行","約 30–45 分鐘","—","依當日路線選出口，盡量減少地下街繞路。"],
+ ["09:00–11:00","皇居外苑＋二重橋","外苑步行、二重橋拍照，依體力折返","停留約 2 小時","中途可找咖啡店休息","以外苑及二重橋外觀為主；不安排進入皇居內部。"],
+ ["11:00–11:45","午餐／咖啡休息","皇居周邊或返回人形町方向找餐廳","約 45 分鐘","定食、麵食或咖啡簡餐","不要排隊太久，留時間拿行李。"],
+ ["11:45–12:15","返回飯店領行李","搭地鐵回人形町","約 30 分鐘","確認護照、手機、充電器","出發前再次檢查房間與寄放行李收據。"],
+ ["12:15–14:00","飯店 → 成田機場","依當日班次選擇直達／轉乘機場交通","約 75–105 分鐘，另留緩衝","可在車站或機場吃點東西","目標約 14:00 抵達機場；請事先查好列車班次、乘車位置及票券。"],
+ ["14:00–16:35","成田機場報到、安檢、候機","依航空公司櫃檯及登機門指示","預留約 2 小時 35 分鐘","機場用餐、補水","確認報到截止時間、登機門及手提行李規範；以航空公司通知為準。"],
+ ["16:35–20:00","成田 → 桃園","搭乘回程航班","飛行時間依航班實際安排","機上休息","時間為當地時間，仍以機票與航空公司通知為準。"]
+ ]
+};
+const defaultPacking = ["護照（確認效期）","機票／訂位資料／登機資訊","飯店訂房確認信","信用卡、日圓現金、提款卡","手機、充電器、行動電源","日本可用網路／eSIM／漫遊","保暖外套、發熱衣、圍巾","好走的鞋、厚襪子","雨傘或輕便雨衣","常備藥品、個人用品","口罩、面紙、濕紙巾","水壺、護唇膏、護手霜","備用購物袋","耳機、眼鏡／隱形眼鏡用品","旅行平安險資料","回程行李重量／尺寸確認"];
+const defaultPrep = ["確認 teamLab 12/8 入場時段與票券","確認青之洞窟 2026 活動是否舉辦","確認六本木與丸之內 2026 點燈公告","查築地週一想吃店家的營業時間","查機場往返列車班次與備用路線","確認飯店寄放行李／入住時間","下載地圖、翻譯與乘車 App","確認航空公司行李額度與報到截止時間"];
+function el(tag,attrs={},textContent=""){const e=document.createElement(tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(textContent)e.textContent=textContent;return e}
+function loadData(){try{return JSON.parse(localStorage.getItem("tokyoTrip2026")||"{}")}catch(e){return {}}}
+let saved=loadData();
+function save(){const data={fields:{},days:{},packing:[],prep:[]};document.querySelectorAll("[data-save]").forEach(x=>data.fields[x.dataset.save]=x.value);["d1","d2","d3","d4"].forEach(d=>{data.days[d]=[...document.querySelectorAll("#rows-"+d+" tr")].map(tr=>({done:tr.querySelector(".donebox").checked,cells:[...tr.querySelectorAll("input.cell,textarea.cell")].map(x=>x.value)}))});data.packing=[...document.querySelectorAll("#packing-list .checkitem")].map(x=>({done:x.querySelector("input[type=checkbox]").checked,text:x.querySelector("input[type=text]").value}));data.prep=[...document.querySelectorAll("#prep-list .checkitem")].map(x=>({done:x.querySelector("input[type=checkbox]").checked,text:x.querySelector("span").textContent}));try{localStorage.setItem("tokyoTrip2026",JSON.stringify(data));document.getElementById("save-status").textContent="✓ 已自動儲存到目前瀏覽器（"+new Date().toLocaleTimeString("zh-TW",{hour:"2-digit",minute:"2-digit"})+"）"}catch(e){document.getElementById("save-status").textContent="無法自動儲存，請使用「匯出備份 JSON」保留資料。"}}
+function makeCell(value,textarea=false){const x=el(textarea?"textarea":"input",{class:"cell"});if(!textarea)x.type="text";x.value=value;x.addEventListener("input",save);return x}
+const columnLabels=["時間","怎麼去","要去哪裡／停多久","吃飯／休息","提醒／備案"];
+function addDragHandle(tr,d){const cell=el("td",{class:"dragcell"});const handle=el("button",{class:"drag-handle",type:"button",draggable:"true",title:"拖曳調整行程順序","aria-label":"拖曳調整行程順序"},"⠿");let pointerStart=null,pointerMoved=false;handle.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse")return;pointerStart={x:e.clientX,y:e.clientY};pointerMoved=false;tr.classList.add("dragging")});handle.addEventListener("pointermove",e=>{if(!pointerStart)return;if(Math.abs(e.clientY-pointerStart.y)+Math.abs(e.clientX-pointerStart.x)<8)return;pointerMoved=true;const target=document.elementFromPoint(e.clientX,e.clientY)?.closest("#rows-"+d+" tr");if(target&&target!==tr){target.classList.add("drop-target");const rect=target.getBoundingClientRect();if(e.clientY>rect.top+rect.height/2)target.after(tr);else target.before(tr);document.querySelectorAll("#rows-"+d+" tr").forEach(x=>{if(x!==target)x.classList.remove("drop-target")})}});const finishPointer=()=>{if(pointerStart){pointerStart=null;tr.classList.remove("dragging");document.querySelectorAll(".drop-target").forEach(x=>x.classList.remove("drop-target"));if(pointerMoved){save();updateProgress(d)}}};handle.addEventListener("pointerup",finishPointer);handle.addEventListener("pointercancel",finishPointer);handle.addEventListener("dragstart",e=>{tr.classList.add("dragging");e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain","reorder")});handle.addEventListener("dragend",()=>{tr.classList.remove("dragging");document.querySelectorAll(".drop-target").forEach(x=>x.classList.remove("drop-target"));save()});tr.addEventListener("dragover",e=>{e.preventDefault();e.dataTransfer.dropEffect="move";tr.classList.add("drop-target")});tr.addEventListener("dragleave",e=>{if(!tr.contains(e.relatedTarget))tr.classList.remove("drop-target")});tr.addEventListener("drop",e=>{e.preventDefault();tr.classList.remove("drop-target");const moving=document.querySelector("tr.dragging");if(moving&&moving!==tr){const rect=tr.getBoundingClientRect();if(e.clientY>rect.top+rect.height/2)tr.after(moving);else tr.before(moving);updateProgress(d);save()}});cell.append(handle);tr.append(cell)}
+function wireRow(tr,d){const cb=tr.querySelector(".donebox");cb.addEventListener("change",()=>{tr.classList.toggle("completed",cb.checked);updateProgress(d);save()});const cells=[...tr.querySelectorAll("td")];cells.forEach((td,i)=>{if(i>0&&i<6)td.dataset.label=columnLabels[i-1]});addDragHandle(tr,d)}
+function renderDay(d){const tbody=document.getElementById("rows-"+d);tbody.innerHTML="";const rows=(saved.days&&saved.days[d])||initial[d].map(r=>({done:false,cells:r}));rows.forEach(r=>{const tr=el("tr");if(r.done)tr.classList.add("completed");const td=el("td",{class:"donecell"});const cb=el("input",{type:"checkbox",class:"donebox","aria-label":"完成這個行程"});cb.checked=!!r.done;td.append(cb);tr.append(td);r.cells.forEach((v,i)=>{const cell=el("td");cell.append(makeCell(v,i>=2));tr.append(cell)});wireRow(tr,d);tbody.append(tr)});updateProgress(d)}
+function updateProgress(d){const all=[...document.querySelectorAll("#rows-"+d+" .donebox")],done=all.filter(x=>x.checked).length;document.getElementById("bar-"+d).style.width=(all.length?done/all.length*100:0)+"%";document.getElementById("label-"+d).textContent=`已完成 ${done} / ${all.length} 個行程`;save()}
+function addRow(d){const tr=el("tr"),td=el("td",{class:"donecell"}),cb=el("input",{type:"checkbox",class:"donebox","aria-label":"完成這個行程"});td.append(cb);tr.append(td);["請填時間","請填交通方式","新增行程內容","用餐或休息安排","提醒或備案"].forEach((v,i)=>{const cell=el("td");cell.append(makeCell(v,i>=2));tr.append(cell)});wireRow(tr,d);document.getElementById("rows-"+d).append(tr);updateProgress(d)}
+function uncheckDay(d){document.querySelectorAll("#rows-"+d+" .donebox").forEach(x=>{x.checked=false;x.closest("tr").classList.remove("completed")});updateProgress(d)}
+function buildCheckList(id,defaults,custom=[]){const root=document.getElementById(id);root.innerHTML="";(custom.length?custom:defaults.map(text=>({text,done:false}))).forEach(item=>{const row=el("label",{class:"checkitem"+(item.done?" checked":"")});const cb=el("input",{type:"checkbox"});cb.checked=!!item.done;const inp=el("input",{type:"text","aria-label":"編輯清單項目"});inp.value=item.text;cb.addEventListener("change",()=>{row.classList.toggle("checked",cb.checked);save()});inp.addEventListener("input",save);row.append(cb,inp);root.append(row)})}
+function addPacking(){const root=document.getElementById("packing-list"),row=el("label",{class:"checkitem"}),cb=el("input",{type:"checkbox"}),inp=el("input",{type:"text",placeholder:"輸入行李項目"});cb.addEventListener("change",()=>{row.classList.toggle("checked",cb.checked);save()});inp.addEventListener("input",save);row.append(cb,inp);root.append(row);inp.focus();save()}
+function uncheckPacking(){document.querySelectorAll("#packing-list input[type=checkbox]").forEach(x=>{x.checked=false;x.closest(".checkitem").classList.remove("checked")});save()}
+function exportData(){save();const blob=new Blob([localStorage.getItem("tokyoTrip2026")||"{}"],{type:"application/json"});const url=URL.createObjectURL(blob),a=el("a",{href:url,download:"tokyo-trip-backup-2026-12.json"});document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url)}
+function resetAll(){if(!confirm("確定要清除目前所有編輯與打勾紀錄，恢復預設行程嗎？建議先匯出備份。"))return;localStorage.removeItem("tokyoTrip2026");location.reload()}
+document.querySelectorAll("[data-save]").forEach(x=>{if(saved.fields&&saved.fields[x.dataset.save]!==undefined)x.value=saved.fields[x.dataset.save];x.addEventListener("input",save)});
+["d1","d2","d3","d4"].forEach(renderDay);
+buildCheckList("packing-list",defaultPacking,saved.packing);
+buildCheckList("prep-list",defaultPrep,saved.prep);
+save();
+let installPrompt=null;const installButton=document.getElementById("install-app");window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;installButton.style.display="inline-block"});installButton.addEventListener("click",async()=>{if(!installPrompt){alert("若使用 iPhone：請在 Safari 點選「分享」→「加入主畫面」。若按鈕未出現，請先將此網頁部署到 HTTPS 網址再開啟。");return}installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installButton.style.display="none"});
+if("serviceWorker" in navigator && location.protocol.startsWith("http")){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));}
+</script>
+
+<script>
+const MODULE_KEY='tokyoTripModules2026';
+let moduleData={restaurants:[],expenses:[],shopping:[],tickets:[]};
+try{moduleData={...moduleData,...JSON.parse(localStorage.getItem(MODULE_KEY)||'{}')}}catch(e){}
+function saveModules(){try{localStorage.setItem(MODULE_KEY,JSON.stringify(moduleData))}catch(e){alert('儲存空間不足，請減少資料或匯出備份。')}updateModulesSummary()}
+function addModuleItem(type){const map={restaurants:['rest-name','rest-area','rest-note'],expenses:['expense-name','expense-amount','expense-currency','expense-payer'],shopping:['shop-name','shop-price','shop-note'],tickets:['ticket-name','ticket-link','ticket-note']};const ids=map[type],vals=ids.map(id=>document.getElementById(id).value.trim());if(!vals[0]){alert('請先填寫名稱。');return}let item={id:Date.now()+Math.random(),done:false};if(type==='restaurants')[item.name,item.area,item.note]=vals;else if(type==='expenses'){item.name=vals[0];item.amount=Number(vals[1]||0);item.currency=vals[2];item.payer=vals[3]}else if(type==='shopping')[item.name,item.price,item.note]=vals;else [item.name,item.link,item.note]=vals;moduleData[type].push(item);ids.forEach(id=>{if(id!=='fx-rate')document.getElementById(id).value=''});saveModules();renderModules()}
+function escapeHTML(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function deleteModuleItem(type,id){moduleData[type]=moduleData[type].filter(x=>x.id!==id);saveModules();renderModules()}
+function toggleModuleItem(type,id,checked){const x=moduleData[type].find(x=>x.id===id);if(x)x.done=checked;saveModules();renderModules()}
+function renderList(type,rootId,formatter){const root=document.getElementById(rootId);root.innerHTML='';if(!moduleData[type].length){root.innerHTML='<p class="note">目前還沒有項目，可以從上方新增。</p>';return}moduleData[type].forEach(item=>{const row=document.createElement('div');row.className='module-item'+(item.done?' done':'');const cb=type==='expenses'?'<span>💴</span>':`<input type="checkbox" aria-label="標記完成" ${item.done?'checked':''} onchange="toggleModuleItem('${type}',${item.id},this.checked)">`;row.innerHTML=`${cb}<div class="item-main">${formatter(item)}</div><div class="item-actions"><button class="secondary" onclick="deleteModuleItem('${type}',${item.id})">刪除</button></div>`;root.append(row)})}
+function renderModules(){renderList('restaurants','restaurants-list',x=>`<b>${escapeHTML(x.name)}</b><small>${escapeHTML([x.area,x.note].filter(Boolean).join('｜'))}</small><small><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([x.name,x.area].filter(Boolean).join(' '))}" target="_blank" rel="noopener">📍 開啟 Google 地圖</a></small>`);renderList('shopping','shopping-list',x=>`<b>${escapeHTML(x.name)}</b><small>${escapeHTML([x.price,x.note].filter(Boolean).join('｜'))}</small>`);renderList('tickets','tickets-list',x=>`<b>${escapeHTML(x.name)}</b><small>${x.link&&/^https?:\/\//i.test(x.link)?`<a href="${escapeHTML(x.link)}" target="_blank" rel="noopener">開啟票券／預約網址</a>`:escapeHTML(x.link||'未填網址或編號')}${x.note?'｜'+escapeHTML(x.note):''}</small>`);renderList('expenses','expenses-list',x=>`<b>${escapeHTML(x.name)}：${x.currency==='TWD'?'NT$':'¥'}${Number(x.amount||0).toLocaleString('en-US')}</b><small>付款人：${escapeHTML(x.payer||'未填')}｜約 NT$${Math.round(x.currency==='TWD'?x.amount:x.amount*Number(document.getElementById('fx-rate').value||0.22)).toLocaleString('en-US')}</small>`);const rate=Number(document.getElementById('fx-rate').value||0.22);const total=moduleData.expenses.reduce((s,x)=>s+(x.currency==='TWD'?Number(x.amount||0):Number(x.amount||0)*rate),0);document.getElementById('expense-total').textContent='總支出：約 NT$'+Math.round(total).toLocaleString('en-US');updateModulesSummary()}
+function updateModulesSummary(){const days=['d1','d2','d3','d4'];let all=0,done=0;days.forEach(d=>{const boxes=[...document.querySelectorAll('#rows-'+d+' .donebox')];all+=boxes.length;done+=boxes.filter(x=>x.checked).length});const rate=Number(document.getElementById('fx-rate')?.value||0.22);const total=(moduleData.expenses||[]).reduce((s,x)=>s+(x.currency==='TWD'?Number(x.amount||0):Number(x.amount||0)*rate),0);const pack=[...document.querySelectorAll('#packing-list input[type=checkbox]')];document.getElementById('sum-progress').textContent=(all?Math.round(done/all*100):0)+'%';document.getElementById('sum-budget').textContent='NT$'+Math.round(total).toLocaleString('en-US');document.getElementById('sum-packing').textContent=pack.filter(x=>!x.checked).length+' 項';document.getElementById('sum-items').textContent=((moduleData.restaurants||[]).length+(moduleData.tickets||[]).length)+' 項'}
+const photoUpload=document.getElementById('photo-upload');photoUpload.addEventListener('change',()=>{const root=document.getElementById('photo-gallery');[...photoUpload.files].forEach(file=>{if(!file.type.startsWith('image/'))return;const reader=new FileReader();reader.onload=()=>{const tile=document.createElement('div');tile.className='photo-tile';const img=document.createElement('img');img.src=reader.result;img.alt=file.name;const caption=document.createElement('div');caption.className='note';caption.style.padding='6px';caption.textContent=file.name;const btn=document.createElement('button');btn.className='secondary';btn.textContent='移除';btn.onclick=()=>tile.remove();tile.append(img,caption,btn);root.append(tile)};reader.readAsDataURL(file)});photoUpload.value=''});
+document.getElementById('fx-rate').addEventListener('input',()=>{saveModules();renderModules()});
+renderModules();
+const oldSave=window.save;document.querySelectorAll('[data-save]').forEach(x=>x.addEventListener('input',updateModulesSummary));
+</script>
+
+</body>
+</html>
